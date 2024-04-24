@@ -52,7 +52,6 @@ absl_hash.lib;
 absl_hashtablez_sampler.lib;
 absl_int128.lib;
 absl_leak_check.lib;
-absl_leak_check_disable.lib;
 absl_log_severity.lib;
 absl_malloc_internal.lib;
 absl_periodic_sampler.lib;
