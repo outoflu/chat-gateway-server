@@ -3,7 +3,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>D:\tool\boost-msvc;$(IncludePath)</IncludePath>
+    <IncludePath>D:\tool\grpc-msvc\third_party\address_sorting\include;D:\tool\grpc-msvc\third_party\abseil-cpp;D:\tool\grpc-msvc\include;D:\tool\boost-msvc;$(IncludePath)</IncludePath>
     <LibraryPath>D:\tool\boost-msvc\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup />
