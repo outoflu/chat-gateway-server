@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <functional>
 #include <map>
+#include <memory>
 
 #include "boost/beast/core.hpp"
 #include "boost/beast/http.hpp"

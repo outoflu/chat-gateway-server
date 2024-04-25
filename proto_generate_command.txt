@@ -1,0 +1,4 @@
+protoc -I="." --grpc_out="." --plugin=protoc-gen-grpc="D:\tool\grpc-msvc\visualpro\Debug\grpc_cpp_plugin.exe" "message.proto"
+// generate message.grpc.pb.cc and message.grpc.pb.h
+protoc --cpp_out=. "message.proto"
+// generate message.pb.cc and message.pb.h
