@@ -7,7 +7,7 @@ unsigned char ToHex(unsigned char x)
 	return  x > 9 ? x + 55 : x + 48;
 }
 
-//16½øÖÆ×ªÎªchar
+//16è¿›åˆ¶è½¬ä¸ºchar
 unsigned char FromHex(unsigned char x)
 {
 	unsigned char y;
@@ -25,18 +25,18 @@ std::string static UrlEncode(const std::string& str)
 	size_t length = str.length();
 	for (size_t i = 0; i < length; i++)
 	{
-		//ÅĞ¶ÏÊÇ·ñ½öÓĞÊı×ÖºÍ×ÖÄ¸¹¹³É
+		//åˆ¤æ–­æ˜¯å¦ä»…æœ‰æ•°å­—å’Œå­—æ¯æ„æˆ
 		if (isalnum((unsigned char)str[i]) ||
 			(str[i] == '-') ||
 			(str[i] == '_') ||
 			(str[i] == '.') ||
 			(str[i] == '~'))
 			strTemp += str[i];
-		else if (str[i] == ' ') //Îª¿Õ×Ö·û
+		else if (str[i] == ' ') //ä¸ºç©ºå­—ç¬¦
 			strTemp += "+";
 		else
 		{
-			//ÆäËû×Ö·ûĞèÒªÌáÇ°¼Ó%²¢ÇÒ¸ßËÄÎ»ºÍµÍËÄÎ»·Ö±ğ×ªÎª16½øÖÆ
+			//å…¶ä»–å­—ç¬¦éœ€è¦æå‰åŠ %å¹¶ä¸”é«˜å››ä½å’Œä½å››ä½åˆ†åˆ«è½¬ä¸º16è¿›åˆ¶
 			strTemp += '%';
 			strTemp += ToHex((unsigned char)str[i] >> 4);
 			strTemp += ToHex((unsigned char)str[i] & 0x0F);
@@ -67,6 +67,15 @@ std::string static UrlDecode(const std::string& str) {
 
 HttpConnection::HttpConnection(tcp::socket socket):_socket(std::move(socket))
 {
+}
+
+HttpConnection::HttpConnection(boost::asio::io_context& ioc):_socket(ioc)
+{
+}
+
+tcp::socket& HttpConnection::GetSocket()
+{
+	return _socket;
 }
 
 void HttpConnection::Start()
@@ -165,7 +174,7 @@ void HttpConnection::PreParseGetParam()
 		}
 		query_string.erase(0, pos + 1);
 	}
-	// ´¦Àí×îºóÒ»¸ö²ÎÊı¶Ô£¨Èç¹ûÃ»ÓĞ & ·Ö¸ô·û£©  
+	// å¤„ç†æœ€åä¸€ä¸ªå‚æ•°å¯¹ï¼ˆå¦‚æœæ²¡æœ‰ & åˆ†éš”ç¬¦ï¼‰  
 	if (!query_string.empty()) {
 		size_t eq_pos = query_string.find('=');
 		if (eq_pos != std::string::npos) {

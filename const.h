@@ -6,12 +6,17 @@
 #include <functional>
 #include <map>
 #include <memory>
+#include <atomic>
+#include <queue>
+#include <mutex>
+#include <condition_variable>
 
 #include "boost/beast/core.hpp"
 #include "boost/beast/http.hpp"
 #include "boost/asio.hpp"
 
 #include "Singleton.h"
+#include "ConfigMgr.h"
 
 #include "json/json.h"
 #include "json/value.h"
