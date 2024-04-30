@@ -47,6 +47,12 @@ SectionInfo ConfigMgr::operator[](const std::string& section)
 	}
 }
 
+ConfigMgr& ConfigMgr::getInstance()
+{
+	static ConfigMgr cfg_Mgr;
+	return cfg_Mgr;
+}
+
 ConfigMgr::ConfigMgr()
 {
 	boost::filesystem::path current_path = boost::filesystem::current_path();

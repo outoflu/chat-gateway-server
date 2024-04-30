@@ -6,7 +6,7 @@
 #include "ConfigMgr.h"
 
 int main() {
-	ConfigMgr gcConfigMgr;
+	auto& gcConfigMgr=ConfigMgr::getInstance();
 	std::string gate_port_str = gcConfigMgr["GateServer"]["Port"];
 	unsigned short gate_port = atoi(gate_port_str.c_str());
 	std::cout << gate_port << std::endl;

@@ -17,6 +17,8 @@ class ConfigMgr
 public:
 	~ConfigMgr();
 	SectionInfo operator[](const std::string& section);
+	static ConfigMgr& getInstance();
+private:
 	ConfigMgr();
 	ConfigMgr(const ConfigMgr& src);
 	ConfigMgr& operator=(const ConfigMgr& src);
