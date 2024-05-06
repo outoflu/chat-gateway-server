@@ -42,6 +42,9 @@
     <ClCompile Include="AsioIOServicePool.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="TestRedisConnect.h">
+      <Filter>头文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CServer.h">
