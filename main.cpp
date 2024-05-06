@@ -4,8 +4,13 @@
 #include "json/reader.h"
 #include "CServer.h"
 #include "ConfigMgr.h"
-
+//#include "TestRedisConnect.h"
 int main() {
+	
+	/*
+	system("chcp 65001");
+	TestRedis();
+	*/
 	auto& gcConfigMgr=ConfigMgr::getInstance();
 	std::string gate_port_str = gcConfigMgr["GateServer"]["Port"];
 	unsigned short gate_port = atoi(gate_port_str.c_str());
