@@ -1,14 +1,13 @@
 #ifndef __TEST__REDIS__
 #define __TEST__REDIS__
 #include "hiredis.h"
-#include "TestRedisConnect.h"
 #include <iostream>
 
 using namespace std;
 
 inline void TestRedis() {
-	//Á¬½Óredis ĞèÒªÆô¶¯²Å¿ÉÒÔ½øĞĞÁ¬½Ó
-	//redisÄ¬ÈÏ¼àÌı¶Ë¿ÚÎª6379 ¿ÉÒÔÔÙÅäÖÃÎÄ¼şÖĞĞŞ¸Ä
+	// redisé»˜è®¤ç›‘å¬ç«¯å£ä¸º6379 å¯ä»¥å†é…ç½®æ–‡ä»¶ä¸­ä¿®æ”¹
+	// è¿æ¥redis
 	redisContext* c = redisConnect("127.0.0.1", 6380);
 	if (c->err)
 	{
@@ -23,26 +22,26 @@ inline void TestRedis() {
 		cout << "---------------" << endl;
 		cout << "err:" << r->str << endl;
 		cout << "---------------" << endl;
-		printf("RedisÈÏÖ¤Ê§°Ü£¡\n");
+		printf("Redisè¿æ¥å¤±è´¥\n");
 	}
 	else {
-		printf("RedisÈÏÖ¤³É¹¦£¡\n");
+		printf("Redisè¿æ¥æˆåŠŸ\n");
 	}
 
-	//ÎªredisÉèÖÃkey
+	//ä¸ºredisè®¾ç½®keyå’Œvalue
 	const char* command1 = "set stest1 value1";
 
-	//Ö´ĞĞredisÃüÁîĞĞ
+	//Ö´æ‰§è¡Œrediså‘½ä»¤
 	r = (redisReply*)redisCommand(c, command1);
 
-	//Èç¹û·µ»ØNULLÔòËµÃ÷Ö´ĞĞÊ§°Ü
+	//å¦‚æœè¿”å›NULLåˆ™è¯´æ˜æ‰§è¡Œå¤±è´¥
 	if (NULL == r)
 	{
 		printf("Execut command1 failure\n");
 		redisFree(c);        return;
 	}
 
-	//Èç¹ûÖ´ĞĞÊ§°ÜÔòÊÍ·ÅÁ¬½Ó
+	//å¦‚æœè¿”å›ä¸ä¸ºOKåˆ™è¯´æ˜æ‰§è¡Œå¤±è´¥
 	if (!(r->type == REDIS_REPLY_STATUS && (strcmp(r->str, "OK") == 0 || strcmp(r->str, "ok") == 0)))
 	{
 		printf("Failed to execute command[%s]\n", command1);
@@ -50,14 +49,14 @@ inline void TestRedis() {
 		redisFree(c);        return;
 	}
 
-	//Ö´ĞĞ³É¹¦ ÊÍ·ÅredisCommandÖ´ĞĞºó·µ»ØµÄredisReplyËùÕ¼ÓÃµÄÄÚ´æ
+	//Ö´æ‰§è¡ŒæˆåŠŸåé‡Šæ”¾èµ„æº
 	freeReplyObject(r);
 	printf("Succeed to execute command[%s]\n", command1);
 
 	const char* command2 = "strlen stest1";
 	r = (redisReply*)redisCommand(c, command2);
 
-	//Èç¹û·µ»ØÀàĞÍ²»ÊÇÕûĞÎ ÔòÊÍ·ÅÁ¬½Ó
+	//å¦‚æœè¿”å›ç±»å‹ä¸ä¸ºintegeråˆ™è¯´æ˜æ‰§è¡Œå¤±è´¥
 	if (r->type != REDIS_REPLY_INTEGER)
 	{
 		printf("Failed to execute command[%s]\n", command2);
@@ -65,13 +64,13 @@ inline void TestRedis() {
 		redisFree(c);        return;
 	}
 
-	//»ñÈ¡×Ö·û´®³¤¶È
+	//è·å–å­—ç¬¦ä¸²é•¿åº¦
 	int length = r->integer;
 	freeReplyObject(r);
 	printf("The length of 'stest1' is %d.\n", length);
 	printf("Succeed to execute command[%s]\n", command2);
 
-	//»ñÈ¡redis¼üÖµ¶ÔĞÅÏ¢
+	//è·å–redisé”®å€¼å¯¹ä¿¡æ¯
 	const char* command3 = "get stest1";
 	r = (redisReply*)redisCommand(c, command3);
 	if (r->type != REDIS_REPLY_STRING)
@@ -95,7 +94,7 @@ inline void TestRedis() {
 	freeReplyObject(r);
 	printf("Succeed to execute command[%s]\n", command4);
 
-	//ÊÍ·ÅÁ¬½Ó×ÊÔ´
+	//é‡Šæ”¾è¿æ¥èµ„æº
 	redisFree(c);
 
 }

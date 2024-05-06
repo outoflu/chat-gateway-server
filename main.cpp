@@ -1,14 +1,16 @@
-/*
 #include <iostream>
 #include "json/json.h"
 #include "json/value.h"
 #include "json/reader.h"
 #include "CServer.h"
 #include "ConfigMgr.h"
-*/
-#include "TestRedisConnect.h"
+//#include "TestRedisConnect.h"
 int main() {
+	
 	/*
+	system("chcp 65001");
+	TestRedis();
+	*/
 	auto& gcConfigMgr=ConfigMgr::getInstance();
 	std::string gate_port_str = gcConfigMgr["GateServer"]["Port"];
 	unsigned short gate_port = atoi(gate_port_str.c_str());
@@ -31,6 +33,4 @@ int main() {
 		std::cerr << "Error:" << e.what() << std::endl;
 		return EXIT_FAILURE;
 	}
-	*/
-	TestRedis();
 }
