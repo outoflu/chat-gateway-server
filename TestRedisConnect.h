@@ -3,6 +3,10 @@
 #include "hiredis.h"
 #include <iostream>
 
+/**
+* 这一页使用UTF8，因为Redis执行命令时要求使用UTF8来编码命令，
+* 使用GBK会导致密码内容正确但不会被正确识别导致连不上，我也不知道为什么
+*/
 using namespace std;
 
 inline void TestRedis() {
