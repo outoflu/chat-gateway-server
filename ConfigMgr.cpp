@@ -83,7 +83,7 @@ ConfigMgr::ConfigMgr(const ConfigMgr& src)
 
 ConfigMgr& ConfigMgr::operator=(const ConfigMgr& src)
 {
-	// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+	// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 	if (this == &src) {
 		return *this;
 	}
