@@ -1,7 +1,7 @@
 #pragma once
 #include "hiredis.h"
 #include <iostream>
-
+#include "RedisMgr.h"
 /**
 * 这一页使用UTF8，因为Redis执行命令时要求使用UTF8来编码命令，
 * 使用GBK会导致密码内容正确但不会被正确识别导致连不上，我也不知道为什么
@@ -103,8 +103,6 @@ inline void TestRedis() {
 }
 
 inline void TestRedisMgr() {
-	assert(RedisMgr::GetInstance()->Connect("127.0.0.1", 6380));
-	assert(RedisMgr::GetInstance()->Auth("123456"));
 	assert(RedisMgr::GetInstance()->Set("blogwebsite","xxx.club"));
 	std::string value="";
 	assert(RedisMgr::GetInstance()->Get("blogwebsite", value) );

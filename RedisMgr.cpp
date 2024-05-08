@@ -315,7 +315,7 @@ std::string RedisMgr::HGet(const std::string &key, const std::string &hkey)
 {
 	auto _connect = _con_pool->getConnection();
 	if (_connect == nullptr) {
-		return false;
+		return "";
 	}
 	const char* argv[3]{ 0 };
 	size_t argvlen[3]{ 0 };
