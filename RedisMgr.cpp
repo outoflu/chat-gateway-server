@@ -45,12 +45,12 @@ redisContext *RedisConPool::getConnection()
 {
 
 	std::unique_lock<std::mutex> lock(mutex_);
-	cond_.wait(lock, [this]
-			   { 
+	cond_.wait(lock, [this]{ 
 			if (b_stop_) {
 				return true;
 			}
-			return !connections_.empty(); });
+			return !connections_.empty(); 
+	});
 	// 如果停止则直接返回空指针
 	if (b_stop_)
 	{

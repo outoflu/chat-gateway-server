@@ -32,4 +32,7 @@ enum ErrorCodes {
 	Success = 0,
 	ErrorJson = 1001,
 	RPCFailed = 1002,
+	VarifyExpired = 1003,
+	VarifyCodeErr = 1004,
+	UserExist = 1005,
 };
