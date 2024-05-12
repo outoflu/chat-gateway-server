@@ -120,6 +120,6 @@ inline void TestRedisMgr() {
 	assert(RedisMgr::GetInstance()->RPop("lpushkey1", value));
 	assert(RedisMgr::GetInstance()->LPop("lpushkey1", value));
 	assert(RedisMgr::GetInstance()->LPop("lpushkey2", value)==false);
-	RedisMgr::GetInstance()->Close();
+	//RedisMgr::GetInstance()->Close();
 }
 }

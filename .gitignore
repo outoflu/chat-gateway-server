@@ -364,3 +364,5 @@ FodyWeavers.xsd
 
 # for vscode
 .vscode/
+*.dll
+*.pdb
