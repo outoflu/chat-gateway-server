@@ -15,10 +15,14 @@ int main() {
 	system("chcp 65001");
 	TestRedisConnect::TestRedisMgr();
 	*/
+	#if _WIN32
+	system("chcp 65001");
+	#endif
 	auto& gcConfigMgr=ConfigMgr::getInstance();
 	std::string gate_port_str = gcConfigMgr["GateServer"]["Port"];
 	unsigned short gate_port = atoi(gate_port_str.c_str());
 	std::cout << gate_port << std::endl;
+	int port = gate_port;
 	try {
 		//unsigned short port = static_cast<unsigned short>(8080);
 		net::io_context ioc{ 1 };

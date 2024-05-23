@@ -82,7 +82,7 @@ LogicSystem::LogicSystem() {
 		beast::ostream(connection->_response.body()) << jsonstr;
 		});
 
-	RegPost("/usr_register", [](std::shared_ptr<HttpConnection> connection) {
+	RegPost("/user_register", [](std::shared_ptr<HttpConnection> connection) {
 		auto body_str = boost::beast::buffers_to_string(connection->_request.body().data());
 		//std::cout << "receive body is" << body_str << std::endl;
 		connection->_response.set(http::field::content_type, "text/json");
@@ -98,8 +98,10 @@ LogicSystem::LogicSystem() {
 			return;
 		}
 		std::string varify_code;
-		bool b_get_varify = RedisMgr::GetInstance()->Get(src_root["email"].asString(), varify_code);
+		const std::string key = std::string("code_") + src_root["email"].asString();
+		bool b_get_varify = RedisMgr::GetInstance()->Get(key, varify_code);
 		if (!b_get_varify) {
+			std::cout << "key is:" << key << std::endl;
 			std::cout << " get varify code expired" << std::endl;
 			root["error"] = ErrorCodes::VarifyExpired;
 			std::string jsonstr = root.toStyledString();
