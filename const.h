@@ -45,6 +45,7 @@ enum ErrorCodes {
 	VarifyExpired = 1003,
 	VarifyCodeErr = 1004,
 	UserExist = 1005,
+	PasswdError = 1006,
 };
 
 class Defer {

@@ -5,6 +5,7 @@
 #include "CServer.h"
 #include "ConfigMgr.h"
 #include "TestRedisConnect.h"
+#include "TestMySQLConnect.h"
 int main() {
 	
 	/*
@@ -18,6 +19,8 @@ int main() {
 	#if _WIN32
 	system("chcp 65001");
 	#endif
+	TestRedisConnect::TestRedis();
+	//TestMySQLConnect();
 	auto& gcConfigMgr=ConfigMgr::getInstance();
 	std::string gate_port_str = gcConfigMgr["GateServer"]["Port"];
 	unsigned short gate_port = atoi(gate_port_str.c_str());
