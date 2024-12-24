@@ -42,7 +42,7 @@ void MySqlPool::checkConnection()
 	for (int i = 0; i < poolSize; i++) {
 		auto con = std::move(_pool.front());
 		_pool.pop();
-		Defer([this, &con]() {
+		Defer defer([this, &con]() {
 			this->_pool.push(std::move(con));
 		});
 		if (timestamp - con->_last_oper_time < 5) {
@@ -147,7 +147,7 @@ int MysqlDao::RegUser(const std::string& name, const std::string& email, const s
 		unique_ptr<sql::ResultSet> res(stmtResult->executeQuery("SELECT @result AS result"));
 		if (res->next()) {
 			int result = res->getInt("result");
-			cout << "Result: " << result << endl;
+			std::cout << "Result: " << result << endl;
 			_pool->returnConnection(std::move(con));
 			return result;
 		}
@@ -222,7 +222,9 @@ bool MysqlDao::UpdatePwd(const std::string& name, const std::string& newpwd) {
 		return true;
 	}
 	catch (sql::SQLException& e) {
-		_pool->returnConnection(std::move(con));
+		if (!con) {
+			_pool->returnConnection(std::move(con));
+		}
 		std::cerr << "SQLException: " << e.what();
 		std::cerr << " (MySQL error code: " << e.getErrorCode();
 		std::cerr << ", SQLState: " << e.getSQLState() << " )" << std::endl;
@@ -303,7 +305,7 @@ bool MysqlDao::TestProcedure(const std::string& email, int& uid, string& name) {
 		}
 
 		uid = res->getInt("uid");
-		cout << "uid: " << uid << endl;
+		std::cout << "uid: " << uid << endl;
 
 		stmtResult.reset(con->_con->createStatement());
 		res.reset(stmtResult->executeQuery("SELECT @userName AS name"));
@@ -312,7 +314,7 @@ bool MysqlDao::TestProcedure(const std::string& email, int& uid, string& name) {
 		}
 
 		name = res->getString("name");
-		cout << "name: " << name << endl;
+		std::cout << "name: " << name << endl;
 		return true;
 
 	}

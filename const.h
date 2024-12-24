@@ -46,6 +46,8 @@ enum ErrorCodes {
 	VarifyCodeErr = 1004,
 	UserExist = 1005,
 	PasswdError = 1006,
+	EmailNotMatch=1007,
+	PasswdUpFailed=1008,
 };
 
 class Defer {
@@ -57,3 +59,5 @@ public:
 private:
 	std::function<void()> _func;
 };
+
+const std::string CODE_PREFIX = "code_";

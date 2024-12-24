@@ -19,7 +19,7 @@ int main() {
 	#if _WIN32
 	system("chcp 65001");
 	#endif
-	TestRedisConnect::TestRedis();
+	//TestRedisConnect::TestRedis();
 	//TestMySQLConnect();
 	auto& gcConfigMgr=ConfigMgr::getInstance();
 	std::string gate_port_str = gcConfigMgr["GateServer"]["Port"];
